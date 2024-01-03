@@ -1,9 +1,7 @@
+import PlacesList from "../components/Places/PlacesList";
+
 function AllPlaces() {
-    return (
-        <div>
-            
-        </div>
-    )
+  return <PlacesList />;
 }
 
-export default AllPlaces
+export default AllPlaces;
