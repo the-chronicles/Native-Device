@@ -44,7 +44,9 @@ function ImagePicker() {
       quality: 0.5,
     });
 
-    setPickedImage(image.uri);
+    if (!image.cancelled) {
+      setPickedImage(image.uri);
+    }
   }
 
   let imagePreview = <Text>No Image taken yet.</Text>;
