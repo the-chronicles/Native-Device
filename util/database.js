@@ -1,19 +1,21 @@
 import * as SQLITE from "expo-sqlite";
 
-const database = SQLITE.openDatabase("placed.db");
+import { Place } from "../models/place";
+
+const database = SQLITE.openDatabase("places.db");
 
 export function init() {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
       tx.executeSql(
         `CREATE TABLE IF NOT EXISTS places(
-        id INTEGER PRIMARY KEY NOT NULL, 
-        title TEXT NOT NULL, 
-        imageUri TEXT NOT NULL,
-        address TEXT NOT NULL,
-        lat REAL NOT NULL,
-        lng NOT NULL,
-      )`,
+          id INTEGER PRIMARY KEY NOT NULL, 
+          title TEXT NOT NULL, 
+          imageUri TEXT NOT NULL,
+          address TEXT NOT NULL,
+          lat REAL NOT NULL,
+          lng REAL NULL
+        )`,
         [],
         () => {
           resolve();
@@ -41,7 +43,6 @@ export function insertPlace(place) {
           place.location.lng,
         ],
         (_, result) => {
-          console.log(result);
           resolve(result);
         },
         (_, error) => {
@@ -52,4 +53,32 @@ export function insertPlace(place) {
   });
 
   return promise;
+}
+
+export function fetchPlaces() {
+  const promise = new Promise((resolve, reject) => {
+    database.transaction((tx) => {
+      tx.executeSql(
+        "SELECT * FROM places",
+        [],
+        (_, result) => {
+          const places = [];
+
+          for (const dp of result.rows._array) {
+            places.push(
+              new Place(dp.title, dp.imageUri, {
+                address: dp.address,
+                lat: dp.lat,
+                lng: dp.lng,
+              }, dp.id)
+            );
+          }
+          resolve(places);
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
 }
