@@ -10,7 +10,7 @@ function PlaceDetails({ route, navigation }) {
 
   function showOnMapHandler() {
     navigation.navigate("Map", {
-      initialLat: fetchedPlace.location.lat,
+      initialLat: fetchedPlace.location.lat
       initialLng: fetchedPlace.location.lng,
     });
   }
