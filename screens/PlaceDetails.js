@@ -36,7 +36,7 @@ function PlaceDetails({ route, navigation }) {
           <Text style={styles.address}>ADDRESS</Text>
         </View>
         <OutlinedButton icon="map" onPress={showOnMapHandler}>
-          View on Map
+          View on Map!
         </OutlinedButton>
       </View>
     </ScrollView>
