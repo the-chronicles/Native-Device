@@ -12,6 +12,7 @@ function PlaceForm({ onCreatePlace }) {
   const [pickedLocation, setPickedLocation] = useState("");
 
   function changeTitleHandler(enteredText) {
+    
     setEnteredTitle(enteredText);
   }
 
