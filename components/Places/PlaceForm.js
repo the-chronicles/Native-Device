@@ -13,7 +13,7 @@ function PlaceForm({ onCreatePlace }) {
 
   function changeTitleHandler(enteredText) {
     setEnteredTitle(enteredText);
-    // setenteredTitle(enteredText);
+    setenteredTitle(enteredText);
   }
 
   function takeImageHandler(imageUri) {
